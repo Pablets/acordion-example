@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Accordion = ({ title, content }) => {
-  const [isActive, setIsActive] = useState(false);
+const Accordion = ({ title, content, isExpanded, handleSelected, id }) => {
+	const clickHandler = () => {
+		if (handleSelected) {
+			handleSelected(id, isExpanded);
+		}
+	};
 
-  return (
-    <div className="accordion-item">
-      <div className="accordion-title" onClick={() => setIsActive(!isActive)}>
-        <div>{title}</div>
-        <div>{isActive ? '-' : '+'}</div>
-      </div>
-      {isActive && <div className="accordion-content">{content}</div>}
-    </div>
-  );
+	return (
+		<div className="accordion-item">
+			<div className="accordion-title" onClick={() => clickHandler()}>
+				<div>{title}</div>
+				<div>{isExpanded ? '-' : '+'}</div>
+			</div>
+			{isExpanded && <div className="accordion-content">{content}</div>}
+		</div>
+	);
 };
 
 export default Accordion;
